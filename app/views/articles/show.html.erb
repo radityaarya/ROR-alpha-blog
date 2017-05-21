@@ -3,3 +3,8 @@
 <h2><%= @article.title %></h2>
 
 <h4><%= @article.description %></h4>
+
+<p>
+  <%= link_to 'Edit', edit_article_path(@article)%> |
+  <%= link_to 'Back to index', articles_path%>
+</p>
