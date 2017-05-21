@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = "An article was succesfully creatad"
       redirect_to article_path(@article)
     else
-      render 'new'
+      render article_path
     end
   end
 
@@ -33,6 +33,13 @@ class ArticlesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    flash[:notice] = "An article was succesfully deleted"
+    redirect_to articles_path
   end
 
   # Show Certain Article by ID
