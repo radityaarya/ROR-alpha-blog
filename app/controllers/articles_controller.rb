@@ -1,9 +1,15 @@
 class ArticlesController < ApplicationController
 
+  def index
+    @articles = Article.all
+  end
+
+  # Show Form for New Input
   def new
     @article = Article.new
   end
 
+  # Post / Create New Input
   def create
     @article = Article.new(article_params)
     if @article.save
@@ -14,12 +20,24 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def show
+  # Edit Article
+  def edit
     @article = Article.find(params[:id])
   end
 
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      flash[:notice] = "An article was succesfully edited"
+      redirect_to article_path(@article)
+    else
+      render 'edit'
+    end
+  end
+
+  # Show Certain Article by ID
+  def show
+    @article = Article.find(params[:id])
   end
 
   private
